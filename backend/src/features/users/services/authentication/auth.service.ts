@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {UsersService} from '../users/users.service';
 import {JwtService} from '@nestjs/jwt';
 import {JwtPayload} from '../../interfaces/jwt-payload';
@@ -13,16 +13,15 @@ export class AuthService {
 	) {
 	}
 
-	async signIn(userLoginDto: UserLoginDto): Promise<string | { error: string }> {
+	async signIn(userLoginDto: UserLoginDto): Promise<string | HttpException> {
 		// In the real-world app you shouldn't expose this method publicly
 		// instead, return a token once you verify user credentials
-		if (this.usersService.findUserByCredentials(userLoginDto)) {
+		const userExists: boolean = !!await this.usersService.findUserByCredentials(userLoginDto);
+		if (userExists) {
 			const user: JwtPayload = {email: 'user@email.com'};
 			return this.jwtService.sign(user);
 		} else {
-			return {
-				error: "invalid credentials"
-			};
+			return new HttpException("invalid credentials", HttpStatus.UNAUTHORIZED);
 		}
 	}
 

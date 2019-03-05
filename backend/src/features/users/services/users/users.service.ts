@@ -27,7 +27,7 @@ export class UsersService {
 	}
 
 	public findUserByCredentials(userCredentials: UserLoginDto) {
-		return this.userRepository.find({
+		return this.userRepository.findOne({
 			where: {userName: userCredentials.userName, password: userCredentials.passWord}
 		})
 	}
