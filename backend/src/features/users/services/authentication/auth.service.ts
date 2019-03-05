@@ -13,13 +13,13 @@ export class AuthService {
 	) {
 	}
 
-	async signIn(userLoginDto: UserLoginDto): Promise<string | HttpException> {
+	async signIn(userLoginDto: UserLoginDto): Promise<string> {
 		const userExists: boolean = !!await this.usersService.findUserByCredentials(userLoginDto);
 		if (userExists) {
 			const user: JwtPayload = {email: userLoginDto.userName};
 			return this.jwtService.sign(user);
 		} else {
-			return new HttpException("invalid credentials", HttpStatus.UNAUTHORIZED);
+			throw new HttpException("invalid credentials", HttpStatus.UNAUTHORIZED);
 		}
 	}
 
