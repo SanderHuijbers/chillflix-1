@@ -9,8 +9,8 @@ export class UsersService {
 	constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
 	public async saveUser(userEntity: UserEntity): Promise<UserEntity> {
-		const existingUsers = await this.userRepository.findOne({where: {userName: userEntity.userName}});
-		if (existingUsers) return this.userRepository.save(userEntity);
+		const userExists = await this.userRepository.findOne({where: {userName: userEntity.userName}});
+		if (userExists) return this.userRepository.save(userEntity);
 		else throw new HttpException('User already exists', HttpStatus.CONFLICT)
 	}
 
@@ -18,8 +18,10 @@ export class UsersService {
 		return await this.userRepository.find();
 	}
 
-	public async user(userId: string): Promise<UserEntity> {
-		return await this.userRepository.findOne(userId);
+	public async user(userId: number): Promise<UserEntity> {
+		const userEntity = await this.userRepository.findOne({where: {userId: userId}});
+		if (userEntity) return userEntity;
+		else throw new HttpException("user not found", HttpStatus.NOT_FOUND);
 	}
 
 	public async deleteUsers(): Promise<void> {

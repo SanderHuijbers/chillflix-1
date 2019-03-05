@@ -19,13 +19,14 @@ export class UsersController {
 	//@UseGuards(AuthGuard())
 	async users(): Promise<User[]> {
 		const userEntities = await this.usersService.users();
-		return userEntities.map(userEntity => User.fromMovieEntity(userEntity))
+		return userEntities.map(userEntity => User.fromUserEntity(userEntity))
 	}
 
 	@Get(':userid')
 	//@UseGuards(AuthGuard())
-	async user(@Param('userid') userId: string): Promise<User> {
-		return User.fromMovieEntity(await this.usersService.user(userId));
+	async user(@Param('userid') userId: number): Promise<User> {
+		const userEntity = await this.usersService.user(userId);
+		return User.fromUserEntity(userEntity);
 	}
 
 	@Delete()

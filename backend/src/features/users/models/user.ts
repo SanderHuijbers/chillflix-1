@@ -6,7 +6,7 @@ export class User {
 	            public readonly age: number) {
 	}
 
-	public static fromMovieEntity(userEntity: UserEntity) {
+	public static fromUserEntity(userEntity: UserEntity) {
 		return new User(userEntity.id, userEntity.userName, userEntity.age);
 	}
 }
