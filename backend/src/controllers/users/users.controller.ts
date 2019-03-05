@@ -19,8 +19,8 @@ export class UsersController {
 	}
 
 	@Get()
-	@UseGuards(AuthGuard())
-	async users(@Req() req, @JwtPayloadDecorator() jwtPayload: JwtPayload): Promise<User[]> {
+	//@UseGuards(AuthGuard())
+	async users(@JwtPayloadDecorator() jwtPayload: JwtPayload): Promise<User[]> {
 		console.log(jwtPayload);
 		const userEntities = await this.usersService.users();
 		return userEntities.map(userEntity => User.fromUserEntity(userEntity))
