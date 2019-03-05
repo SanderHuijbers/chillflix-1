@@ -15,8 +15,8 @@ export class MovieService {
 		return moviesEntities.map(movieEntity => movieEntity.movie());
 	}
 
-	async saveCreateMovieDto(createMovieDto: CreateMovieDto): Promise<MovieEntity> {
-		return this.movieRepository.save(createMovieDto.movieEntity());
+	async saveEntity(movieEntity: MovieEntity): Promise<MovieEntity> {
+		return this.movieRepository.save(movieEntity);
 	}
 }
 

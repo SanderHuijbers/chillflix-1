@@ -12,13 +12,12 @@ export class MovieController {
 
 	@Get('search/:searchquery')
 	search(@Param('searchquery') searchQuery: string): any {
-		console.log('searchquery: ', searchQuery);
 		return this.omdbProxyService.searchMovies(searchQuery);
 	}
 
 	@Post()
 	saveMovie(@Body() createMovieDto: CreateMovieDto) {
-		this.movieService.saveCreateMovieDto(createMovieDto);
+		this.movieService.saveEntity(createMovieDto.movieEntity());
 	}
 
 	@Get()
