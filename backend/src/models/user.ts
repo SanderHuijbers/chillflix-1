@@ -1,4 +1,4 @@
-import {UserEntity} from '../entities/user-entity';
+import {UserEntity} from '../features/users/entities/user-entity';
 
 export class User {
 	constructor(public readonly id: number,

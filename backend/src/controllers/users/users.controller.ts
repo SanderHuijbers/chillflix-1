@@ -1,7 +1,7 @@
-import {Body, Controller, Delete, Get, Param, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Req, UseGuards} from '@nestjs/common';
 import {CreateUserDto} from '../../dtos/create-user-dto';
 import {UsersService} from '../../features/users/services/users/users.service';
-import {User} from '../../features/users/models/user';
+import {User} from '../../models/user';
 import {ApiUseTags} from '@nestjs/swagger';
 import {AuthGuard} from '@nestjs/passport';
 import {JwtPayloadDecorator} from '../../features/decorators/jwt-payload-decorator';
@@ -20,14 +20,15 @@ export class UsersController {
 
 	@Get()
 	@UseGuards(AuthGuard())
-	async users(@JwtPayloadDecorator() jwtPayload: JwtPayload): Promise<User[]> {
+	async users(@Req() req, @JwtPayloadDecorator() jwtPayload: JwtPayload): Promise<User[]> {
+		console.log(jwtPayload);
 		const userEntities = await this.usersService.users();
 		return userEntities.map(userEntity => User.fromUserEntity(userEntity))
 	}
 
 	@Get(':userid')
 	//@UseGuards(AuthGuard())
-	async user(@Param('userid') userId: number): Promise<User> {
+	async user(@Req() req,@Param('userid') userId: number): Promise<User> {
 		const userEntity = await this.usersService.user(userId);
 		return User.fromUserEntity(userEntity);
 	}

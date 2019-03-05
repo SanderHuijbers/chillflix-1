@@ -1,4 +1,4 @@
-import {Body, Controller, Post} from '@nestjs/common';
+import {Body, Controller, Post, Req} from '@nestjs/common';
 import {UserLoginDto} from '../../dtos/user-login-dto';
 import {AuthService} from '../../services/authentication/auth.service';
 import {ApiUseTags} from '@nestjs/swagger';
@@ -10,7 +10,7 @@ export class AuthController {
 	}
 
 	@Post('login')
-	login(@Body() userLoginDto: UserLoginDto) {
+	login(@Req() req, @Body() userLoginDto: UserLoginDto) {
 		return this.authService.signIn(userLoginDto);
 	}
 }
