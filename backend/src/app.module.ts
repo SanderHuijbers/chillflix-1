@@ -16,7 +16,7 @@ import {UsersModule} from './features/users/users.module';
 			port: 5432,
 			username: 'postgres',
 			password: 'root',
-			database: 'chillflix',
+			database: 'chillflix-maurice',
 			entities: [__dirname + '/**/*-entity{.ts,.js}'],
 			synchronize: true,
 			logging: false
