@@ -17,6 +17,6 @@ export class CreateUserDto {
 	passWord: string;
 
 	public userEntity(): UserEntity {
-		return new UserEntity(this.userName, this.age, /*Bcrypt.hashSync(this.passWord, 10)*/ this.passWord);
+		return new UserEntity(this.userName, this.age, Bcrypt.hashSync(this.passWord, 1));
 	}
 }

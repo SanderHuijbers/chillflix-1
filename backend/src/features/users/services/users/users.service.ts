@@ -3,6 +3,8 @@ import {Repository} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';
 import {UserEntity} from '../../entities/user-entity';
 import {UserLoginDto} from '../../dtos/user-login-dto';
+import * as Bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class UsersService {
@@ -28,10 +30,9 @@ export class UsersService {
 		return await this.userRepository.clear();
 	}
 
-	public findUserByCredentials(userCredentials: UserLoginDto) {
-		return this.userRepository.findOne({
-			where: {userName: userCredentials.userName, password: userCredentials.passWord}
-		})
+	public async findUserByCredentials(userCredentials: UserLoginDto): Promise<boolean> {
+		const user = await this.userRepository.findOne({where:{userName: userCredentials.userName}});
+		return !!(user && Bcrypt.compareSync(userCredentials.passWord, user.password));
 	}
 
 	public findUserByUserName(userName: string): Promise<UserEntity[]> {
