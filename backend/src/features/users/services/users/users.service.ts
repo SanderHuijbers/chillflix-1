@@ -10,7 +10,7 @@ export class UsersService {
 
 	public async saveUser(userEntity: UserEntity): Promise<UserEntity> {
 		const userExists = await this.userRepository.findOne({where: {userName: userEntity.userName}});
-		if (userExists) return this.userRepository.save(userEntity);
+		if (!userExists) return this.userRepository.save(userEntity);
 		else throw new HttpException('User already exists', HttpStatus.CONFLICT)
 	}
 
