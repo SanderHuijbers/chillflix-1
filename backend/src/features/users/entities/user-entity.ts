@@ -8,8 +8,7 @@ export class UserEntity {
 	@Column('integer') public readonly age: number;
 	@Column('varchar') public readonly password: string;
 
-	constructor(id: number, userName: string, age: number, password: string) {
-		this.id = id;
+	constructor(userName: string, age: number, password: string) {
 		this.userName = userName;
 		this.age = age;
 		this.password = password;
