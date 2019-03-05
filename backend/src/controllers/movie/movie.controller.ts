@@ -1,25 +1,31 @@
-import {Body, Controller, Get, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post} from '@nestjs/common';
 import {CreateMovieDto} from '../../dtos/create-movie-dto';
 import {Movie} from '../../models/movie';
-import {MovieService} from '../../services/movie/movie.service';
+import {OmdbProxyService} from '../../services/omdb-proxy/omdb-proxy.service';
+import {MoviesService} from '../../services/movie/movies.service';
 import {ApiUseTags} from '@nestjs/swagger';
-import {AuthGuard} from '@nestjs/passport';
+import {Observable} from 'rxjs';
 
 @ApiUseTags('movies')
 @Controller('movies')
 export class MovieController {
-	constructor(private movieService: MovieService) {
+	constructor(private readonly moviesService: MoviesService,
+	            private readonly omdbProxyService: OmdbProxyService) {
+	}
+
+	@Get('search/:searchquery')
+	search(@Param('searchquery') searchQuery: string): Observable<CreateMovieDto[]> {
+		return this.omdbProxyService.searchMovies(searchQuery);
 	}
 
 	@Post()
 	saveMovie(@Body() createMovieDto: CreateMovieDto) {
-		this.movieService.saveUser(createMovieDto.movieEntity());
+		this.moviesService.saveMovie(createMovieDto.movieEntity());
 	}
 
 	@Get()
-	@UseGuards(AuthGuard())
 	async getMovies(): Promise<Movie[]> {
-		const movieEntities = await this.movieService.movies();
+		const movieEntities = await this.moviesService.movies();
 		return movieEntities.map(movieEntity => Movie.fromMovieEntity(movieEntity))
 	}
 }
