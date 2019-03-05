@@ -2,29 +2,24 @@ import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import {Repository} from 'typeorm';
 import {InjectRepository} from '@nestjs/typeorm';
 import {UserEntity} from '../../entities/user-entity';
-import {CreateUserDto} from '../../../../dtos/create-user-dto';
-import {User} from '../../models/user';
 import {UserLoginDto} from '../../dtos/user-login-dto';
 
 @Injectable()
 export class UsersService {
-	constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {
-	}
+	constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
-	public async saveUser(createUserDto: CreateUserDto): Promise<UserEntity> {
-		const existingUsers = await this.userRepository.findOne({where: {userName: createUserDto.userName}});
-		if (existingUsers) return this.userRepository.save(createUserDto.userEntity());
+	public async saveUser(userEntity: UserEntity): Promise<UserEntity> {
+		const existingUsers = await this.userRepository.findOne({where: {userName: userEntity.userName}});
+		if (existingUsers) return this.userRepository.save(userEntity);
 		else throw new HttpException('User already exists', HttpStatus.CONFLICT)
 	}
 
-	public async users(): Promise<User[]> {
-		const userEntities = await this.userRepository.find();
-		return userEntities.map(userEntity => userEntity.user())
+	public async users(): Promise<UserEntity[]> {
+		return await this.userRepository.find();
 	}
 
-	public async user(userId: string): Promise<User> {
-		const userEntity = await this.userRepository.findOne(userId);
-		return userEntity.user();
+	public async user(userId: string): Promise<UserEntity> {
+		return await this.userRepository.findOne(userId);
 	}
 
 	public async deleteUsers(): Promise<void> {
@@ -37,7 +32,7 @@ export class UsersService {
 		})
 	}
 
-	public findUserByUserName(userName: string) {
+	public findUserByUserName(userName: string): Promise<UserEntity[]> {
 		return this.userRepository.find({where: {userName: userName}})
 	}
 }

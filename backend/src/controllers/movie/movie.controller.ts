@@ -13,13 +13,14 @@ export class MovieController {
 
 	@Post()
 	saveMovie(@Body() createMovieDto: CreateMovieDto) {
-		this.movieService.saveUser(createMovieDto);
+		this.movieService.saveUser(createMovieDto.movieEntity());
 	}
 
 	@Get()
 	@UseGuards(AuthGuard())
-	getMovies(): Promise<Movie[]> {
-		return this.movieService.movies();
+	async getMovies(): Promise<Movie[]> {
+		const movieEntities = await this.movieService.movies();
+		return movieEntities.map(movieEntity => movieEntity.movie())
 	}
 }
 

@@ -12,19 +12,20 @@ export class UsersController {
 
 	@Post()
 	saveUser(@Body() createUserDto: CreateUserDto) {
-		return this.usersService.saveUser(createUserDto);
+		return this.usersService.saveUser(createUserDto.userEntity());
 	}
 
 	@Get()
 	//@UseGuards(AuthGuard())
-	users(): Promise<User[]> {
-		return this.usersService.users();
+	async users(): Promise<User[]> {
+		const userEntities = await this.usersService.users();
+		return userEntities.map(userEntity => User.fromMovieEntity(userEntity))
 	}
 
 	@Get(':userid')
 	//@UseGuards(AuthGuard())
-	user(@Param('userid') userId: string): Promise<User> {
-		return this.usersService.user(userId);
+	async user(@Param('userid') userId: string): Promise<User> {
+		return User.fromMovieEntity(await this.usersService.user(userId));
 	}
 
 	@Delete()
