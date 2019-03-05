@@ -20,7 +20,7 @@ export class MovieController {
 	@UseGuards(AuthGuard())
 	async getMovies(): Promise<Movie[]> {
 		const movieEntities = await this.movieService.movies();
-		return movieEntities.map(movieEntity => movieEntity.movie())
+		return movieEntities.map(movieEntity => Movie.fromMovieEntity(movieEntity))
 	}
 }
 

@@ -1,3 +1,5 @@
+import {MovieEntity} from '../entities/movie-entity';
+
 export class Movie {
 	constructor(
 		public readonly id: number,
@@ -7,5 +9,9 @@ export class Movie {
 		public readonly type: string,
 		public readonly posterUrl: string
 	) {
+	}
+
+	public static fromMovieEntity(movieEntity: MovieEntity): Movie {
+		return new Movie(movieEntity.id, movieEntity.title, movieEntity.year, movieEntity.imdbId, movieEntity.type, movieEntity.posterUrl)
 	}
 }

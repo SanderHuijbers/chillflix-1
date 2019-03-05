@@ -17,8 +17,4 @@ export class MovieEntity {
 		this.type = type;
 		this.posterUrl = posterUrl;
 	}
-
-	public movie(): Movie {
-		return new Movie(this.id, this.title, this.year, this.imdbId, this.type, this.posterUrl)
-	}
 }
