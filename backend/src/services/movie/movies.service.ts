@@ -25,7 +25,8 @@ export class MoviesService {
 	}
 
 	public async saveMovieForUser(movieEntity: MovieEntity, userId: string): Promise<MovieEntity[]> {
-		const userEntity: UserEntity = await this.usersRepository.findOne(userId);
+		const userEntity: UserEntity = await this.usersRepository.findOne(userId, {relations: ["movies"]});
+		userEntity.addMovie(movieEntity);
 		const userWithMovies = await this.usersRepository.save(userEntity);
 		return userWithMovies.movies;
 	}
