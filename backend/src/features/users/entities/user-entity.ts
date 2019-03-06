@@ -8,10 +8,10 @@ export class UserEntity {
 	@Column('integer') public readonly age: number;
 	@Column('varchar') public readonly password: string;
 
-	@ManyToMany(type => MovieEntity, movie => movie.users, {
+	/*@ManyToMany(type => MovieEntity, movie => movie.users, {
 		cascade: true
 	})
-	@JoinTable({name: 'user_movie'})
+	@JoinTable({name: 'user_movie'})*/
 	public movies?: MovieEntity[];
 
 	constructor(userName: string, age: number, password: string) {

@@ -10,7 +10,7 @@ export class MovieEntity {
 	@Column('varchar') public readonly type: string;
 	@Column('varchar') public readonly posterUrl: string;
 
-	@ManyToMany(type => UserEntity, user => user.movies)
+	/*@ManyToMany(type => UserEntity, user => user.movies)*/
 	public users: UserEntity[];
 
 	constructor(title: string, year: number, imdbId: string, type: string, posterUrl: string) {
