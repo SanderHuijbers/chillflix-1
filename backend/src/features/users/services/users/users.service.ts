@@ -11,9 +11,9 @@ export class UsersService {
 	constructor(@InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>) {}
 
 	public async saveUser(userEntity: UserEntity): Promise<UserEntity> {
-		/*assignment 1: check if userName already exists and if it does not insert into db, if it does throw Http exception (conflict)
-		* HINT: throw new HttpException('User already exists', HttpStatus.CONFLICT)*/
-		return this.userRepository.findOne();
+		const userExists = !! await this.userRepository.findOne();
+		if (userExists) return this.userRepository.save(userEntity);
+		else throw new HttpException('User already exists', HttpStatus.CONFLICT);
 	}
 
 	public async users(): Promise<UserEntity[]> {
@@ -21,25 +21,23 @@ export class UsersService {
 	}
 
 	public async user(userId: number): Promise<UserEntity> {
-		/*assignment 2: check if user exists and if it does return it, if it does not throw Http exception (not found)
-		* HINT: throw new HttpException("user not found", HttpStatus.NOT_FOUND)*/
-		return this.userRepository.findOne();
+		const user = await this.userRepository.findOne(userId);
+		if (user) return user;
+		else throw new HttpException("user not found", HttpStatus.NOT_FOUND);
 	}
 
 	public async deleteUsers(): Promise<void> {
-		/*assignment 3: delete all users from table
-		* HINT:  clear */
+		this.userRepository.clear();
 	}
 
-	public findUserByUserName(userName: string): Promise<UserEntity[]> {
-		/*assignment 4: check if user credentials are correct by checking if username and password for a user exist in user table
-		* HINT:  {where:{userName: userCredentials.userName}} */
-		return this.userRepository.find({where: {userName: userName}})
+	public async findUserByUserName(userName: string): Promise<UserEntity> {
+		const user = await this.userRepository.findOne({where: {userName: userName}});
+		if (user) return user;
+		else throw new HttpException("user not found", HttpStatus.NOT_FOUND);
 	}
 
 	public async findUserByCredentials(userCredentials: UserLoginDto): Promise<boolean> {
-		/*assignment 5: check if user credentials are correct by checking if username and password for a user exist in user table
-		* HINT:  {where:{userName: userCredentials.userName}} */
-		return !!await this.userRepository.findOne();
+		const user = await this.userRepository.findOne({where:{userName: userCredentials.userName}});
+		return Bcrypt.compare(userCredentials.passWord, user.password);
 	}
 }
