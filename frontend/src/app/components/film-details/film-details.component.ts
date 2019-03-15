@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FilmDetail} from '../../models/film-detail.model';
+import {MovieDetail} from '../../../../../shared/models/movie-detail.model';
 import {switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {FilmService} from '../../services/film.service';
@@ -12,8 +12,8 @@ import {FilmService} from '../../services/film.service';
 	styleUrls: ['./film-details.component.scss']
 })
 export class FilmDetailsComponent {
-	public filmDetails$: Observable<FilmDetail | undefined> = this.activatedRoute.params
-		.pipe(switchMap(params => this.filmService.filmById$(params.imdbId)));
+	public filmDetails$: Observable<MovieDetail | undefined> = this.activatedRoute.params
+		.pipe(switchMap(params => this.filmService.filmDetailsById$(params.imdbId)));
 
 	constructor(private activatedRoute: ActivatedRoute,
 	            private filmService: FilmService) {

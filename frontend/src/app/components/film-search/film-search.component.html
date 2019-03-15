@@ -4,8 +4,8 @@
        [(ngModel)]="userInput"
        (change)="handleSearchInputChange(userInput)">
 
-<div class="d-flex justify-content-around" *ngIf="films !== null; else showSpinner">
-    <app-film-list-item *ngFor="let film of films" [film]="film" (onAddToBucket)="handleOnAddToBucket($event)">
+<div class="row" *ngIf="films !== null; else showSpinner">
+    <app-film-list-item class="col-2 mb-3" *ngFor="let film of films" [film]="film" (onAddToBucket)="handleOnAddToBucket($event)">
     </app-film-list-item>
 </div>
 <ng-template #showSpinner>

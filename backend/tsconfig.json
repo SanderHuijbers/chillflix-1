@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -8,7 +11,11 @@
     "target": "es6",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "importHelpers": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
   "exclude": ["node_modules"]
 }

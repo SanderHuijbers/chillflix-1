@@ -10,7 +10,7 @@ export class AuthController {
 	}
 
 	@Post('login')
-	login(@Req() req, @Body() userLoginDto: UserLoginDto) {
+	login(@Req() req: any, @Body() userLoginDto: UserLoginDto) {
 		return this.authService.signIn(userLoginDto);
 	}
 }

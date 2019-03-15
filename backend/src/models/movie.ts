@@ -12,6 +12,7 @@ export class Movie {
 	}
 
 	public static fromMovieEntity(movieEntity: MovieEntity): Movie {
-		return new Movie(movieEntity.id, movieEntity.title, movieEntity.year, movieEntity.imdbId, movieEntity.type, movieEntity.posterUrl)
+		if (movieEntity.id) return new Movie(movieEntity.id, movieEntity.title, movieEntity.year, movieEntity.imdbId, movieEntity.type, movieEntity.posterUrl)
+		else throw new Error("Movie has no Id")
 	}
 }

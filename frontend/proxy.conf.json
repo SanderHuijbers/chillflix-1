@@ -1,6 +1,10 @@
 {
-  "/omdb/api": {
-    "target": "https://ix0mst5aq9.execute-api.us-east-2.amazonaws.com/default/OMDB-movie-db",
-    "secure": false
+  "/api": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
   }
 }

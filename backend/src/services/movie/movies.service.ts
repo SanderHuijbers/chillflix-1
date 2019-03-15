@@ -18,19 +18,22 @@ export class MoviesService {
 	async saveMovie(movieEntity: MovieEntity): Promise<MovieEntity> {
 		const foundMovie = this.moviesRepository.findOne({imdbId: movieEntity.imdbId});
 		if (foundMovie) return this.moviesRepository.save(movieEntity);
-		else throw new HttpException("user not found", HttpStatus.NOT_FOUND);
+		else throw new HttpException('user not found', HttpStatus.NOT_FOUND);
 	}
 
 	public async saveMovieForUser(movieEntity: MovieEntity, userId: string): Promise<MovieEntity[]> {
-		const userEntity: UserEntity = await this.usersRepository.findOne(userId, {relations: ["movies"]});
-		userEntity.addMovie(movieEntity);
-		return (await this.usersRepository.save(userEntity)).movies;
+		const userEntity = await this.usersRepository.findOne(userId, {relations: ["movies"]});
+		if (userEntity) {
+			userEntity.addMovie(movieEntity);
+			return (await this.usersRepository.save(userEntity)).movies;
+		}
+		else throw new HttpException('user not found', HttpStatus.NOT_FOUND);
 	}
 
 	public async moviesForUser(userId: string): Promise<MovieEntity[]> {
-		const userEntity: UserEntity = await this.usersRepository.findOne(userId, {relations: ["movies"]});
+		const userEntity = await this.usersRepository.findOne(userId, {relations: ["movies"]});
 		if (userEntity) return userEntity.movies;
-		else throw new HttpException("user not found", HttpStatus.NOT_FOUND);
+		else throw new HttpException('user not found', HttpStatus.NOT_FOUND);
 	}
 }
 

@@ -2,8 +2,9 @@ import {IsEmail, IsNumber, IsString} from 'class-validator';
 import {ApiModelProperty} from '@nestjs/swagger';
 import {UserEntity} from '../features/users/entities/user-entity';
 import * as Bcrypt from 'bcrypt';
+import {ICreateUser} from '../../../shared/interfaces/create-user.interface';
 
-export class CreateUserDto {
+export class CreateUserDto implements ICreateUser{
 	@IsEmail()
 	@ApiModelProperty()
 	userName: string;
@@ -15,6 +16,12 @@ export class CreateUserDto {
 	@IsString()
 	@ApiModelProperty()
 	passWord: string;
+
+	constructor(userName: string, age: number, passWord: string) {
+		this.userName = userName;
+		this.age = age;
+		this.passWord = passWord;
+	}
 
 	public userEntity(): UserEntity {
 		return new UserEntity(this.userName, this.age, Bcrypt.hashSync(this.passWord, 1));

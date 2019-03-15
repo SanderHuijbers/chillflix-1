@@ -25,12 +25,12 @@ export class UsersController {
 
 	@Get()
 	async users(@JwtPayloadDecorator() jwtPayload: JwtPayload): Promise<User[]> {
-		const userEntities = await this.usersService.users();
+		const userEntities = (await this.usersService.users()) || [];
 		return userEntities.map(userEntity => User.fromUserEntity(userEntity))
 	}
 
 	@Get(':userid')
-	async user(@Req() req,@Param('userid') userId: number): Promise<User> {
+	async user(@Req() req: any, @Param('userid') userId: number): Promise<User> {
 		const userEntity = await this.usersService.user(userId);
 		return User.fromUserEntity(userEntity);
 	}

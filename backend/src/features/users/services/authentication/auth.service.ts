@@ -12,7 +12,7 @@ export class AuthService {
 	) {}
 
 	async signIn(userLoginDto: UserLoginDto): Promise<string> {
-		const userExists: boolean = !!await this.usersService.findUserByCredentials(userLoginDto);
+		const userExists: boolean = !!await this.usersService.userIsValid(userLoginDto);
 		if (userExists) return this.jwtService.sign({
 				email: userLoginDto.userName,
 				duration: 3600,

@@ -5,6 +5,7 @@ import {OmdbProxyService} from '../../services/omdb-proxy/omdb-proxy.service';
 import {MoviesService} from '../../services/movie/movies.service';
 import {ApiUseTags} from '@nestjs/swagger';
 import {Observable} from 'rxjs';
+import {MovieDetail} from '../../../../shared/models/movie-detail.model';
 
 @ApiUseTags('movies')
 @Controller('movies')
@@ -15,7 +16,12 @@ export class MovieController {
 
 	@Get('search/:searchquery')
 	search(@Param('searchquery') searchQuery: string): Observable<CreateMovieDto[]> {
-		return this.omdbProxyService.searchMovies(searchQuery);
+		return this.omdbProxyService.searchMovies$(searchQuery);
+	}
+
+	@Get('details/:imdbId')
+	movieDetails(@Param('imdbId') imdbId: string): Observable<MovieDetail> {
+		return this.omdbProxyService.movieDetails$(imdbId);
 	}
 
 	@Post()

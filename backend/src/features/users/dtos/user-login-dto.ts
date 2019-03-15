@@ -9,4 +9,9 @@ export class UserLoginDto {
 	@IsString()
 	@ApiModelProperty()
 	passWord: string;
+
+	constructor(userName: string, passWord: string) {
+		this.userName = userName;
+		this.passWord = passWord;
+	}
 }

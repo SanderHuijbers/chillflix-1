@@ -36,8 +36,8 @@ export class UsersService {
 		else throw new HttpException("user not found", HttpStatus.NOT_FOUND);
 	}
 
-	public async findUserByCredentials(userCredentials: UserLoginDto): Promise<boolean> {
+	public async userIsValid(userCredentials: UserLoginDto): Promise<boolean> {
 		const user = await this.userRepository.findOne({where:{userName: userCredentials.userName}});
-		return Bcrypt.compare(userCredentials.passWord, user.password);
+		return !!(user && Bcrypt.compare(userCredentials.passWord, user.password));
 	}
 }

@@ -1,6 +1,13 @@
 <div class="card">
-  <div class="p-3">{{film.title}}</div>
-  <img src="{{film.poster}}" class="w-100">
+    <div class="">{{film.title}}</div>
+    <img class="" src="{{film.posterUrl}}" class="w-100">
+    <div class="row">
+        <div class="col-6">
+            <button class="btn btn-primary w-100 h-100" [routerLink]="'/film-details/' + film.imdbId">details</button>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary w-100 h-100" (click)="handleAddToBucketClick()">toevoegen aan bucket</button>
+        </div>
+    </div>
 </div>
-<button class="btn btn-primary" [routerLink]="'/film-details/' + film.imdbId">details</button>
-<button class="btn btn-primary" (click)="handleAddToBucketClick()">film toevoegen aan bucket</button>
+

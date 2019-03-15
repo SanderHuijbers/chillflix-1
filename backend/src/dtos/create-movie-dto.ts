@@ -1,9 +1,9 @@
 import {ApiModelProperty} from "@nestjs/swagger";
 import {IsNumber, IsString} from 'class-validator';
 import {MovieEntity} from '../entities/movie-entity';
-import {OmdbMovieResponse} from '../services/omdb-proxy/omdb-proxy.service';
+import {ICreateMovie} from '../../../shared/interfaces/create-movie.interface';
 
-export class CreateMovieDto {
+export class CreateMovieDto implements ICreateMovie{
 	@IsString()
 	@ApiModelProperty()
 	public readonly title: string;
@@ -34,14 +34,5 @@ export class CreateMovieDto {
 		this.imdbId = imdbId;
 		this.type = type;
 		this.posterUrl = posterUrl;
-	}
-
-	public static fromOmdbMovieResponse(omdbMovieResponse: OmdbMovieResponse): CreateMovieDto {
-		return new CreateMovieDto(
-			omdbMovieResponse.Title,
-			parseInt(omdbMovieResponse.Year),
-			omdbMovieResponse.imdbID,
-			omdbMovieResponse.Type,
-			omdbMovieResponse.Poster)
 	}
 }

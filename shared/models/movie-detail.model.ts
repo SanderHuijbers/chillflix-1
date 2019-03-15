@@ -1,4 +1,6 @@
-export class FilmDetail {
+import {IMovieDetail} from '../interfaces/movie-detail.interface';
+
+export class MovieDetail implements IMovieDetail {
 	constructor(
 		public readonly title: string,
 		public readonly year: string,
@@ -14,13 +16,13 @@ export class FilmDetail {
 		public readonly country: string,
 		public readonly awards: string,
 		public readonly poster: string,
-		public readonly metascore: string,
-		public readonly imdbrating: string,
-		public readonly imdbvotes: string,
-		public readonly imdbid: string,
+		public readonly metaScore: string,
+		public readonly imdbRating: string,
+		public readonly imdbVotes: string,
+		public readonly imdbId: string,
 		public readonly type: string,
 		public readonly dvd: string,
-		public readonly boxoffice: string,
+		public readonly boxOffice: string,
 		public readonly production: string,
 		public readonly website: string,
 		public readonly response: string
