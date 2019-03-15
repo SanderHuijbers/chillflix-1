@@ -1,4 +1,6 @@
-<div class="film-bucket">
+<div class="film-bucket bg-dark">
+    <h4>saved movies</h4>
+    <hr class="bg-light">
     <div *ngFor="let film of bucketFilms" class="row mb-2" [routerLink]="'/film-details/' + film.imdbId">
         <div class="col-8">{{film.title}}</div>
         <div class="col-4">

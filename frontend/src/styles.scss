@@ -1,1 +1,10 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
+body {
+  background: $gray-700;
+}
+
+.cursor-pointer {
+  &:hover {
+    cursor: pointer;
+  }
+}

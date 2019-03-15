@@ -1,9 +1,21 @@
-<pre *ngIf="(filmDetails$ | async) !== null; else showSpinner">
-    {{(filmDetails$ | async) | json}}
-</pre>
-
 <ng-template #showSpinner>
     <div class="spinner-grow" role="status">
         <span class="sr-only">Loading...</span>
     </div>
 </ng-template>
+
+<div class="card bg-dark w-50 m-auto text-white mt-4" *ngIf="(filmDetails$ | async)">
+    <div class="card-body">
+        <h5 class="card-title">{{(filmDetails$ | async)?.title}}</h5>
+        <div class="card-text">
+            <div>year: {{(filmDetails$ | async)?.year}}</div>
+            <div>type: {{(filmDetails$ | async)?.type}}</div>
+            <div>director: {{(filmDetails$ | async)?.director}}</div>
+            <div>box office: {{(filmDetails$ | async)?.boxOffice}}</div>
+            <div>country: {{(filmDetails$ | async)?.country}}</div>
+            <div>actors: {{(filmDetails$ | async)?.actors}}</div>
+            <div>genre: {{(filmDetails$ | async)?.genre}}</div>
+        </div>
+    </div>
+    <img class="card-img-top h-50" src="{{(filmDetails$ | async)?.poster}}">
+</div>
