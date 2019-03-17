@@ -2,9 +2,10 @@
        placeholder="search by films title"
        type="search"
        [(ngModel)]="userInput"
-       (change)="handleSearchInputChange(userInput)">
+       (change)="handleSearchInputChange(userInput)"
+       @fadeInOut>
 
-<div class="row" *ngIf="films !== null; else showSpinner">
+<div class="row" *ngIf="films !== null; else showSpinner" @fadeInOut>
     <app-film-list-item class="col-2 mb-3" *ngFor="let film of films" [film]="film" (onAddToBucket)="handleOnAddToBucket($event)">
     </app-film-list-item>
 </div>
@@ -14,4 +15,4 @@
     </div>
 </ng-template>
 
-<app-film-bucket [bucketFilms]="bucket" (onRemoveFilm)="handleOnRemoveFilm($event)"></app-film-bucket>
+<app-film-bucket [bucketFilms]="bucket" (onRemoveFilm)="handleOnRemoveFilm($event)" @fadeInOut></app-film-bucket>

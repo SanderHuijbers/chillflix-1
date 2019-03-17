@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Film} from '../../models/film';
 import {FilmService} from '../../services/film.service';
 import {take, tap} from 'rxjs/operators';
+import {Animations} from '../../shared/utils/animations';
 
 /*assignment 4.1 refactor the movie search form to work reactive*/
 
@@ -13,7 +14,8 @@ import {take, tap} from 'rxjs/operators';
 @Component({
 	selector: 'app-film-search',
 	templateUrl: './film-search.component.html',
-	styleUrls: ['./film-search.component.scss']
+	styleUrls: ['./film-search.component.scss'],
+	animations: [Animations.fadeInOut]
 })
 export class FilmSearchComponent {
 	public films: Film[] | undefined | null = undefined;
