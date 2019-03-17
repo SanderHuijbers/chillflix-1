@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BillionDollarsPipe} from './pipes/billion-dollars.pipe';
 import {FilterPipe} from './pipes/filter-boolean-property.pipe';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,6 +13,8 @@ import {FilmDetailsComponent} from './components/film-details/film-details.compo
 import {FilmListItemComponent} from './shared/components/film-list-item/film-list-item.component';
 import { FilmBucketComponent } from './shared/components/film-bucket/film-bucket.component';
 import { LoginComponent } from './components/login/login.component';
+import { LoginFormComponent } from './shared/components/login-form/login-form.component';
+import { SignupFormComponent } from './shared/components/signup-form/signup-form.component';
 
 
 @NgModule({
@@ -25,12 +27,15 @@ import { LoginComponent } from './components/login/login.component';
 		FilmDetailsComponent,
 		FilmListItemComponent,
 		FilmBucketComponent,
-		LoginComponent
+		LoginComponent,
+		LoginFormComponent,
+		SignupFormComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		FormsModule,
+		ReactiveFormsModule,
 		HttpClientModule
 	],
 	providers: [],

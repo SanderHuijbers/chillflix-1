@@ -1,13 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Film} from '../models/film';
 import {map, take} from 'rxjs/operators';
 import {MovieDetail} from '../../../../shared/models/movie-detail.model';
 import {ICreateMovie} from '../../../../shared/interfaces/create-movie.interface';
-import {FilmDetailsComponent} from '../components/film-details/film-details.component';
 import {IMovieDetail} from '../../../../shared/interfaces/movie-detail.interface';
-import {CreateMovieDto} from '../../../../backend/src/dtos/create-movie-dto';
 
 @Injectable({
 	providedIn: 'root'

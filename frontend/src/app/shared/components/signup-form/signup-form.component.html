@@ -1,0 +1,59 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label for="signup-form-email">Email address</label>
+        <!--we added binding using the "formControl directive-->
+        <input type="email"
+               [formControl]="signUpForm.controls.userName"
+               class="form-control"
+               id="signup-form-email"
+               aria-describedby="signup-form-email-help"
+               placeholder="Enter username">
+        <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
+        <div class="text-danger" *ngIf="signUpForm.controls.userName.invalid  && !signUpForm.controls.userName.pristine">
+            Please provide a valid email address
+        </div>
+        <small id="signup-form-email-help" class="form-text text-muted">
+            We'll never share your email with anyone else.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="signup-form-age">age</label>
+        <!--we added binding using the "formControl directive-->
+        <input type="number"
+               [formControl]="signUpForm.controls.age"
+               class="form-control"
+               id="signup-form-age"
+               aria-describedby="signup-form-age-help"
+               placeholder="age">
+        <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
+        <div class="text-danger" *ngIf="signUpForm.controls.age.invalid  && !signUpForm.controls.age.pristine">
+            Please provide a valid age above 18 years old
+        </div>
+        <small id="signup-form-age-help" class="form-text text-muted">
+            only users above 18 years are allowed.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="signup-form-password">Password</label>
+        <!--we added binding using the "formControl directive-->
+        <input type="password"
+               [formControl]="signUpForm.controls.password"
+               class="form-control"
+               id="signup-form-password"
+               aria-describedby="signup-form-password-help"
+               placeholder="Password">
+        <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
+        <div class="text-danger" *ngIf="signUpForm.controls.password.invalid && !signUpForm.controls.password.pristine">
+            Please provide a safe password. (one special character, capital and a minimum of 8 digits)
+        </div>
+        <small id="signup-form-password-help" class="form-text text-muted">
+            keep it safe with at least one special character, capital and a minimum of 8 digits.
+        </small>
+    </div>
+
+    <button type="submit" class="btn btn-primary">sign me up!</button>
+
+</form>

@@ -15,15 +15,15 @@ export class CreateUserDto implements ICreateUser{
 
 	@IsString()
 	@ApiModelProperty()
-	passWord: string;
+	password: string;
 
 	constructor(userName: string, age: number, passWord: string) {
 		this.userName = userName;
 		this.age = age;
-		this.passWord = passWord;
+		this.password = passWord;
 	}
 
 	public userEntity(): UserEntity {
-		return new UserEntity(this.userName, this.age, Bcrypt.hashSync(this.passWord, 1));
+		return new UserEntity(this.userName, this.age, Bcrypt.hashSync(this.password, 1));
 	}
 }
