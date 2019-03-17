@@ -1,0 +1,22 @@
+<div class="card bg-dark w-50 m-auto">
+    <div class="card-body">
+        <form [formGroup]="loginForm">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" aria-describedby="passwordHelp"
+                       placeholder="Password">
+                <small id="passwordHelp" class="form-text text-muted">keep it safe with at least one special character,
+                    capital and a minimum of 9 digits.
+                </small>
+            </div>
+            <button type="submit"></button>
+        </form>
+    </div>
+</div>
