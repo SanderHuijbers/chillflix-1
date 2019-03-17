@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IUserLogin} from '../../../../../../shared/interfaces/user-login.interface';
 
 @Component({
 	selector: 'app-login-form',
@@ -10,27 +8,23 @@ import {IUserLogin} from '../../../../../../shared/interfaces/user-login.interfa
 })
 export class LoginFormComponent implements OnInit {
 
-	public readonly loginForm = new FormGroup({
-		userName:new FormControl(undefined, [Validators.required, Validators.email]),
-		password: new FormControl(undefined, [Validators.required])
-	});
+	/*assignment 1.1 Binding: create a formGroup containing the controls we see in our page
+	* HINT: new FormGroup & new FormControl*/
+
+	/*Assignment 2.1 Validation: add validations to the formGroup/controls we created in assignment 1
+	* HINT: new FormControl(undefined, [Validators.required, Validators.email])*/
 
 	constructor(private authService: AuthService) {
 	}
 
 	ngOnInit() {
-		this.loginForm.valueChanges.subscribe(console.log);
+		/*assignment 1.3 Binding: subscribe to the formGroups valueChanges property and console.log the current value
+		* HINT: subscribe()*/
 	}
 
 	public onSubmit () {
-		this.authService.login(LoginFormComponent.userLogin(this.loginForm)).subscribe();
-	}
-
-	private static userLogin(loginForm: FormGroup): IUserLogin {
-		return {
-			userName: loginForm.controls.userName.value,
-			password: loginForm.controls.password.value
-		}
+		/*assignment 3.3 logging in: on submit call the authService to login the user
+		HINT: no hint*/
 	}
 
 }

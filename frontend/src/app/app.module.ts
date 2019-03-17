@@ -15,7 +15,6 @@ import { FilmBucketComponent } from './shared/components/film-bucket/film-bucket
 import { LoginComponent } from './components/login/login.component';
 import { LoginFormComponent } from './shared/components/login-form/login-form.component';
 import { SignupFormComponent } from './shared/components/signup-form/signup-form.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -30,15 +29,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 		FilmBucketComponent,
 		LoginComponent,
 		LoginFormComponent,
-		SignupFormComponent,
+		SignupFormComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
-		HttpClientModule,
-		BrowserAnimationsModule
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

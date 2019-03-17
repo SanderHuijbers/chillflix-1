@@ -5,16 +5,15 @@ import {IUserLogin} from '../../../../shared/interfaces/user-login.interface';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthService {
 
-	public static readonly api = "api/auth/login";
+  public static readonly api = "api/auth/login";
 
-	constructor(private http: HttpClient) {
-	}
+  constructor(private http: HttpClient) { }
 
-	public login(userLogin: IUserLogin): Observable<any> {
-		return this.http.post(AuthService.api, userLogin).pipe(take(1));
-	}
+  public login(userLogin: IUserLogin): Observable<any> {
+    return this.http.post(AuthService.api, userLogin).pipe(take(1));
+  }
 }
