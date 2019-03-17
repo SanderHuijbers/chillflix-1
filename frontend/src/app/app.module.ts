@@ -11,10 +11,10 @@ import {HomeComponent} from './components/home/home.component';
 import {FilmSearchComponent} from './components/film-search/film-search.component';
 import {FilmDetailsComponent} from './components/film-details/film-details.component';
 import {FilmListItemComponent} from './shared/components/film-list-item/film-list-item.component';
-import { FilmBucketComponent } from './shared/components/film-bucket/film-bucket.component';
-import { LoginComponent } from './components/login/login.component';
-import { LoginFormComponent } from './shared/components/login-form/login-form.component';
-import { SignupFormComponent } from './shared/components/signup-form/signup-form.component';
+import {FilmBucketComponent} from './shared/components/film-bucket/film-bucket.component';
+import {LoginComponent} from './components/login/login.component';
+import {LoginFormComponent} from './shared/components/login-form/login-form.component';
+import {SignupFormComponent} from './shared/components/signup-form/signup-form.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 

@@ -9,7 +9,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AuthService {
 
-	public static readonly api = "api/auth/login";
+	private static readonly api = "api/auth/login";
 
 	constructor(private http: HttpClient) {
 	}

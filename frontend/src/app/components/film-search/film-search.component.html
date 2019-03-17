@@ -2,10 +2,11 @@
        placeholder="search by films title"
        type="search"
        [formControl]="searchControl"
-        @fadeInOut>
+       @fadeInOut>
 
 <div class="row" *ngIf="films !== null; else showSpinner" @fadeInOut>
-    <app-film-list-item class="col-2 mb-3" *ngFor="let film of films" [film]="film" (onAddToBucket)="handleOnAddToBucket($event)">
+    <app-film-list-item class="col-2 mb-3" *ngFor="let film of films" [film]="film"
+                        (onAddToBucket)="handleOnAddToBucket($event)">
     </app-film-list-item>
 </div>
 <ng-template #showSpinner>

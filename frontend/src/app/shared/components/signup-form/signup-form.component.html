@@ -10,7 +10,8 @@
                aria-describedby="signup-form-email-help"
                placeholder="Enter username">
         <!--here a conditional error message is shown that activates when the control is invalid and has been interacted with-->
-        <div class="text-danger" *ngIf="signUpForm.controls.userName.invalid  && !signUpForm.controls.userName.pristine">
+        <div class="text-danger"
+             *ngIf="signUpForm.controls.userName.invalid  && !signUpForm.controls.userName.pristine">
             Please provide a valid email address
         </div>
         <small id="signup-form-email-help" class="form-text text-muted">

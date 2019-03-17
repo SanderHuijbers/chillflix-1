@@ -1,6 +1,9 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FilmSearchComponent} from './film-search.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {AppModule} from '../../app.module';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('FilmSearchComponent', () => {
 	let component: FilmSearchComponent;
@@ -8,7 +11,7 @@ describe('FilmSearchComponent', () => {
 
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations: [FilmSearchComponent]
+			imports: [AppModule, NoopAnimationsModule]
 		})
 			.compileComponents();
 	}));

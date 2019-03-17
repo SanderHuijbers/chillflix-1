@@ -5,7 +5,7 @@ import {FilmSearchComponent} from './components/film-search/film-search.componen
 import {FilmDetailsComponent} from './components/film-details/film-details.component';
 import {LoginComponent} from './components/login/login.component';
 
-const routes: Routes = [
+export const routes: Routes = [
 	{path: 'home', component: HomeComponent},
 	{path: 'film-search', component: FilmSearchComponent},
 	{path: 'login', component: LoginComponent},

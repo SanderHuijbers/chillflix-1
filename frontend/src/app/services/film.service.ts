@@ -13,7 +13,8 @@ import {IMovieDetail} from '../../../../shared/interfaces/movie-detail.interface
 export class FilmService {
 	private static api = 'api/movies';
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient) {
+	}
 
 	public search$(title: string): Observable<Film[]> {
 		return this.http.get<ICreateMovie[]>(`${FilmService.api}/search/${title}`)

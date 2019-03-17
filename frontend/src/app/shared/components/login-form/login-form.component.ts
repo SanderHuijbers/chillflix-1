@@ -11,7 +11,7 @@ import {IUserLogin} from '../../../../../../shared/interfaces/user-login.interfa
 export class LoginFormComponent implements OnInit {
 
 	public readonly loginForm = new FormGroup({
-		userName:new FormControl(undefined, [Validators.required, Validators.email]),
+		userName: new FormControl(undefined, [Validators.required, Validators.email]),
 		password: new FormControl(undefined, [Validators.required])
 	});
 
@@ -22,7 +22,7 @@ export class LoginFormComponent implements OnInit {
 		this.loginForm.valueChanges.subscribe(console.log);
 	}
 
-	public onSubmit () {
+	public onSubmit() {
 		this.authService.login(LoginFormComponent.userLogin(this.loginForm)).subscribe();
 	}
 

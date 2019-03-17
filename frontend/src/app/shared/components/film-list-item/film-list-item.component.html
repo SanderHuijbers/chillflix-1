@@ -1,14 +1,16 @@
 <div class="card bg-dark text-white">
-    <img class="card-img-top" src="{{film.posterUrl}}" class="w-100">
+    <img class="card-img-top" src="{{film?.posterUrl}}" class="w-100">
     <div class="card-body">
-        <h5 class="card-title">{{film.title}}</h5>
-        <p class="card-text">{{film.year}}</p>
+        <h5 class="card-title">{{film?.title}}</h5>
+        <p class="card-text">{{film?.year}}</p>
         <div class="row">
             <div class="col-5">
-                <button class="btn btn-secondary cursor-pointer" [routerLink]="'/film-details/' + film.imdbId">details</button>
+                <button class="btn btn-secondary cursor-pointer" [routerLink]="'/film-details/' + film?.imdbId">details
+                </button>
             </div>
             <div class="col-7">
-                <button class="btn btn-primary w-100 h-100 cursor-pointer" (click)="handleAddToBucketClick()">opslaan</button>
+                <button class="btn btn-primary w-100 h-100 cursor-pointer" (click)="handleAddToBucketClick()">opslaan
+                </button>
             </div>
         </div>
     </div>
