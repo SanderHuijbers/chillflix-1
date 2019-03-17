@@ -1,37 +1,34 @@
-<!--assignment 1.2 Binding: bind the formGroup and controls we made in our component controller
-HINT: [formGroup]="myFormGroup" & [formControl]="myFormControl"-->
-
-<!--assignment 3.1 logging in: add a ngSubmit event to the form tag that we can handle in our controller
-HINT: (ngSubmit)="mySubmitMethod()" -->
-<form>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
         <label for="login-form-email">Email address</label>
         <input type="email"
+               [formControl]="loginForm.controls.userName"
                class="form-control"
                id="login-form-email"
                aria-describedby="login-form-email-help"
                placeholder="Enter username">
-        <!-- Assignment 2.2 Validation: show validation message
-        HINT: <div class="text-danger" *ngIf="my condition">
+        <div class="text-danger" *ngIf="loginForm.controls.userName.invalid && !loginForm.controls.userName.pristine">
             Please provide a valid email address
-        </div>-->
+        </div>
         <small id="login-form-email-help" class="form-text text-muted">enter a valid email address</small>
     </div>
 
     <div class="form-group">
         <label for="login-form-password">Password</label>
         <input type="password"
+               [formControl]="loginForm.controls.password"
                class="form-control"
                id="login-form-password"
                aria-describedby="login-form-password-help"
                placeholder="Password">
+        <div class="text-danger" *ngIf="loginForm.controls.password.invalid && !loginForm.controls.password.pristine">
+            password is required
+        </div>
         <small id="login-form-password-help" class="form-text text-muted">enter your password
         </small>
     </div>
 
-    <!--assignment 3.3 logging in: conditionally add a disabled property to the submit button to make sure the user cannot submit until all validation rules are met
-    HINT: [disabled]="myCondition"-->
-    <button type="submit" class="btn btn-primary">log me in!</button>
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">log me in!</button>
 
 </form>
