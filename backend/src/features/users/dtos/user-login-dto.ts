@@ -1,7 +1,8 @@
 import {IsEmail, IsString} from 'class-validator';
 import {ApiModelProperty} from '@nestjs/swagger';
+import {IUserLogin} from '../../../../../shared/interfaces/user-login.interface';
 
-export class UserLoginDto {
+export class UserLoginDto implements IUserLogin{
 	@IsEmail()
 	@ApiModelProperty()
 	userName: string;

@@ -27,8 +27,7 @@ export class SignupFormComponent implements OnInit {
 
 	/* on form submit sending data to the service and saving the user*/
 	public onSubmit(): void {
-		if (this.signUpForm.valid) this.userService.saveUser(SignupFormComponent.createUser(this.signUpForm)).subscribe();
-		Object.values(this.signUpForm.controls).forEach(control => control.markAsDirty());
+		this.userService.saveUser(SignupFormComponent.createUser(this.signUpForm)).subscribe();
 	}
 
 	public static createUser(signUpForm: FormGroup): ICreateUser {
