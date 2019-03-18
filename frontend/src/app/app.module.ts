@@ -30,7 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 		FilmBucketComponent,
 		LoginComponent,
 		LoginFormComponent,
-		SignupFormComponent
+		SignupFormComponent,
 	],
 	imports: [
 		BrowserModule,
