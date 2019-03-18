@@ -11,13 +11,15 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 	) {}
 
-	async signIn(userLoginDto: UserLoginDto): Promise<string> {
+	async signIn(userLoginDto: UserLoginDto): Promise<{token: string}> {
 		const userExists: boolean = !!await this.usersService.userIsValid(userLoginDto);
-		if (userExists) return this.jwtService.sign({
+		if (userExists) return {
+			token: this.jwtService.sign({
 				email: userLoginDto.userName,
 				duration: 3600,
 				role: 'admin'
-			});
+			})
+		};
 		else throw new HttpException("invalid credentials", HttpStatus.UNAUTHORIZED);
 	}
 

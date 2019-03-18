@@ -38,6 +38,6 @@ export class UsersService {
 
 	public async userIsValid(userCredentials: UserLoginDto): Promise<boolean> {
 		const user = await this.userRepository.findOne({where:{userName: userCredentials.userName}});
-		return !!(user && Bcrypt.compare(userCredentials.password, user.password));
+		return !!(user && await Bcrypt.compare(userCredentials.password, user.password));
 	}
 }
