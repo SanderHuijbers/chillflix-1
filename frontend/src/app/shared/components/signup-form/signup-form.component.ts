@@ -22,10 +22,8 @@ export class SignupFormComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		/* subscribing to the forms valueChanges property so we can do some checking with it*/
 	}
 
-	/* on form submit sending data to the service and saving the user*/
 	public onSubmit(): void {
 		this.userService.saveUser(SignupFormComponent.createUser(this.signUpForm)).subscribe();
 	}
@@ -41,7 +39,6 @@ export class SignupFormComponent implements OnInit {
 	private static emailVerificationFormGroupValidator(): ValidatorFn {
 		return (control: AbstractControl) => {
 			const formGroup = control as FormGroup;
-
 			if (formGroup.controls.userName.value === formGroup.controls.userNameVerification.value) return null;
 			else return {emailIsNotTheSameError: "email address is not the same"}
 		}
