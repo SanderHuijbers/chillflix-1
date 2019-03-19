@@ -30,7 +30,7 @@ export class FilmSearchComponent implements OnInit {
 		return this.searchControl.valueChanges.pipe(
 			tap(() => this.films = null),
 			filter(() => this.searchControl.valid),
-			debounceTime(500),
+			//debounceTime(500),
 			tap(value => this.refreshMovieSearchData(value))
 		).subscribe()
 	}

@@ -1,3 +1,4 @@
+import { IFilmService } from './film.service.interface';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -10,7 +11,7 @@ import {IMovieDetail} from '../../../../shared/interfaces/movie-detail.interface
 @Injectable({
 	providedIn: 'root'
 })
-export class FilmService {
+export class FilmService implements IFilmService{
 	private static api = 'api/movies';
 
 	constructor(private http: HttpClient) {

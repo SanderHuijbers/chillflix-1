@@ -18,24 +18,32 @@ describe('FilmService', () => {
 			filmService = TestBed.get(FilmService);
 			httpTestingController = TestBed.get(HttpTestingController);
 		}
-	);
+    );
+    
+    // aftereach gets triggered after each "it"
+    afterEach(() => {
+        httpTestingController.verify();// Finally, assert that there are no outstanding requests.
+    })
 
 	describe('filmDetailsById$',  () => {
-
 		it('should do a get request to recieve film-details', () => {
 			const imdbId = 'imdbId';
 			// Make an HTTP GET request
-			filmService.filmDetailsById$(imdbId).subscribe(response => expect(response).toEqual(FilmServiceSpecHelper.filmMock));
+            filmService.filmDetailsById$(imdbId)
+                .subscribe(response => 
+                    expect(response).toEqual(FilmServiceSpecHelper.filmMock)
+                );
 
 			const req = httpTestingController.expectOne(`api/movies/details/${imdbId}`);
-			// Assert that the request is a POST.
 			expect(req.request.method).toEqual('GET');
-			// Respond with mock data, causing Observable to resolve.
-			// Subscribe callback asserts that correct data was returned.
-			req.flush(FilmServiceSpecHelper.filmMock);
-			// Finally, assert that there are no outstanding requests.
-			httpTestingController.verify();
-		});
-
+		
+			req.flush(FilmServiceSpecHelper.filmMock); // flush request with mock data
+        });
+    })
+    
+    describe('search$',  () => {
+		it('should do a get request to recieve found films', () => {
+			// assignment 3:
+        });
 	})
 });
