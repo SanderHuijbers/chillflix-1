@@ -25,6 +25,8 @@ export class AuthService {
 			);
 	}
 
+	public token = "732863"
+
 	/*assignment 1.2: getter for local storage
 	 create a method that gets the token from localstorage
 	HINT: localStorage.getItem("lastname");*/
