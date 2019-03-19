@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {UsersService} from '../../../services/users.service';
 import {ICreateUser} from '../../../../../../shared/interfaces/create-user.interface';
 
@@ -14,15 +14,15 @@ export class SignupFormComponent implements OnInit {
 	public readonly signUpForm = new FormGroup({
 		userName: new FormControl(undefined, [Validators.required, Validators.email]),
 		age: new FormControl(undefined, [Validators.required, Validators.min(15)]),
-		password: new FormControl(undefined, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')])
-	});
+		password: new FormControl(undefined, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')]),
+		userNameVerification: new FormControl(undefined, [Validators.required])
+	}, SignupFormComponent.emailVerificationFormGroupValidator());
 
 	constructor(private userService: UsersService) {
 	}
 
 	ngOnInit() {
 		/* subscribing to the forms valueChanges property so we can do some checking with it*/
-		this.signUpForm.valueChanges.subscribe(formValues => console.log("logging form values on changes: ", formValues))
 	}
 
 	/* on form submit sending data to the service and saving the user*/
@@ -35,6 +35,15 @@ export class SignupFormComponent implements OnInit {
 			userName: signUpForm.controls.userName.value,
 			age: signUpForm.controls.age.value,
 			password: signUpForm.controls.password.value
+		}
+	}
+
+	private static emailVerificationFormGroupValidator(): ValidatorFn {
+		return (control: AbstractControl) => {
+			const formGroup = control as FormGroup;
+
+			if (formGroup.controls.userName.value === formGroup.controls.userNameVerification.value) return null;
+			else return {emailIsNotTheSameError: "email address is not the same"}
 		}
 	}
 }

@@ -19,7 +19,6 @@ export class LoginFormComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.loginForm.valueChanges.subscribe(console.log);
 	}
 
 	public onSubmit () {
