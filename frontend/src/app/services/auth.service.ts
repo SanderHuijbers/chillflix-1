@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {take} from 'rxjs/operators';
+import {take, tap} from 'rxjs/operators';
 import {IUserLogin} from '../../../../shared/interfaces/user-login.interface';
 import {HttpClient} from '@angular/common/http';
 
@@ -15,6 +15,17 @@ export class AuthService {
 	}
 
 	public login(userLogin: IUserLogin): Observable<any> {
-		return this.http.post(AuthService.api, userLogin).pipe(take(1));
+		/*assignment 1.1: storing the token in localstorage
+		store the token (recieved from our AuthService.api on successfull login) in localstorage
+		HINT: localStorage.setItem("lastname", "Blok");*/
+		return this.http.post(AuthService.api, userLogin)
+			.pipe(
+				tap(),
+				take(1)
+			);
 	}
+
+	/*assignment 1.2: getter for local storage
+	 create a method that gets the token from localstorage
+	HINT: localStorage.getItem("lastname");*/
 }
