@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BillionDollarsPipe} from './pipes/billion-dollars.pipe';
 import {FilterPipe} from './pipes/filter-boolean-property.pipe';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './components/home/home.component';
 import {FilmSearchComponent} from './components/film-search/film-search.component';
 import {FilmDetailsComponent} from './components/film-details/film-details.component';
@@ -16,6 +16,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginFormComponent } from './shared/components/login-form/login-form.component';
 import { SignupFormComponent } from './shared/components/signup-form/signup-form.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {JwtTokenInterceptor} from './interceptors/jwt-token-interceptor.service';
 
 
 @NgModule({
@@ -40,7 +41,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 		HttpClientModule,
 		BrowserAnimationsModule
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: JwtTokenInterceptor,
+			multi: true
+		}
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {

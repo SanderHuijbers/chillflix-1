@@ -18,16 +18,26 @@ export class AuthService {
 		/*assignment 1.1: storing the token in localstorage
 		store the token (recieved from our AuthService.api on successfull login) in localstorage
 		HINT: localStorage.setItem("lastname", "Blok");*/
-		return this.http.post(AuthService.api, userLogin)
+		return this.http.post<ITokenResponse>(AuthService.api, userLogin)
 			.pipe(
-				tap(),
+				tap(data=> localStorage.setItem('token',  data.token)),
 				take(1)
 			);
 	}
 
-	public token = "732863"
+	public logout() {
+		localStorage.removeItem('token')
+	}
+
+	public token(): string {
+		return localStorage.getItem('token') as string;
+	}
 
 	/*assignment 1.2: getter for local storage
 	 create a method that gets the token from localstorage
 	HINT: localStorage.getItem("lastname");*/
+}
+
+interface ITokenResponse {
+	token: string;
 }

@@ -21,11 +21,10 @@ export class AuthService {
 			const jwtToken = this.jwtToken(userLoginDto);
 			// response.render('send', { csrfToken: request.csrfToken() });
 			// response.cookie('jwt', jwtToken, {maxAge: UsersModuleConf.jwtValidDuration, httpOnly: true});
-			const response = {
+			return {
 				token: jwtToken,
 				duration: UsersModuleConf.jwtValidDuration
 			};
-			return response;
 		} else throw new HttpException("invalid credentials", HttpStatus.UNAUTHORIZED);
 	}
 

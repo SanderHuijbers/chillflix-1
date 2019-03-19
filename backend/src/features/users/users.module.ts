@@ -28,9 +28,9 @@ import {CsurfMiddleware} from '@nest-middlewares/csurf';
 	providers: [UsersService, AuthService, JwtStrategyService]
 })
 export class UsersModule {
-	// configure(consumer: MiddlewareConsumer) {
-	// 	consumer
-	// 		.apply(CookieParserMiddleware).forRoutes({path: '*', method: RequestMethod.ALL})
-	// 		.apply(CsurfMiddleware).forRoutes({path: '**', method: RequestMethod.ALL})
-	// }
+	configure(consumer: MiddlewareConsumer) {
+		consumer
+			// .apply(CookieParserMiddleware).forRoutes({path: '*', method: RequestMethod.ALL})
+			// .apply(CsurfMiddleware).forRoutes({path: '**', method: RequestMethod.ALL})
+	}
 }
