@@ -1,12 +1,13 @@
-import { Calculator } from './calculator';
-import { async, ComponentFixture, TestBed, fakeAsync, inject, tick} from '@angular/core/testing';
-
+import {Calculator} from './calculator';
 
 
 fdescribe('FilmSearchComponent', () => {
 	let calculator: Calculator;
 
-    it('test', () => {
+    it('should test', () => {
         expect(true).toBeTruthy
     })
+
+	// assignment test the sumAll method
+	// assignment test the storage functionality
 });
