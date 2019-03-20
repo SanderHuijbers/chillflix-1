@@ -7,13 +7,14 @@ export class Calculator {
 		return result
 	}
 
-	public sumAll(numbers: number[]): number {
+	public sumAll(numbers: number[]) {
 		return numbers.join();
 	}
 
 	public multiply(a: number, b: number): number {
+		const result = a * b
 		this.storage = this.addToStorage(result);
-		return a * b
+		return result;
 	}
 
 	public devide(a: number, b: number): number {
@@ -21,6 +22,6 @@ export class Calculator {
 	}
 
 	private addToStorage(result: number) {
-		this.storage = [...this.storage, result];
+		return this.storage = [...this.storage, result];
 	}
 }
