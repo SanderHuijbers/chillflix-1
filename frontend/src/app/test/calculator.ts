@@ -12,7 +12,7 @@ export class Calculator {
 	}
 
 	public multiply(a: number, b: number): number {
-		const result = a * b
+		const result = a * b;
 		this.storage = this.addToStorage(result);
 		return result;
 	}
