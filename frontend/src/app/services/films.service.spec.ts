@@ -26,7 +26,7 @@ describe('FilmService', () => {
     })
 
 	describe('filmDetailsById$',  () => {
-		it('should do a get request to recieve film-details', () => {
+		it('should do a get request to receive film-details', () => {
 			const imdbId = 'imdbId';
 			// Make an HTTP GET request
             filmService.filmDetailsById$(imdbId)
@@ -42,7 +42,7 @@ describe('FilmService', () => {
     })
     
     describe('search$',  () => {
-		it('should do a get request to recieve found films', () => {
+		it('should do a get request to receive found films', () => {
 			// assignment 3:
         });
 	})
