@@ -23,7 +23,7 @@ describe('FilmService', () => {
     // aftereach gets triggered after each "it"
     afterEach(() => {
         httpTestingController.verify();// Finally, assert that there are no outstanding requests.
-    })
+    });
 
 	describe('filmDetailsById$',  () => {
 		it('should do a get request to receive film-details', () => {
@@ -39,7 +39,7 @@ describe('FilmService', () => {
 		
 			req.flush(FilmServiceSpecHelper.filmMock); // flush request with mock data
         });
-    })
+    });
     
     describe('search$',  () => {
 		it('should do a get request to receive found films', () => {
