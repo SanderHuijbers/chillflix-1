@@ -16,6 +16,11 @@ import {LoginComponent} from './components/login/login.component';
 import {LoginFormComponent} from './shared/components/login-form/login-form.component';
 import {SignupFormComponent} from './shared/components/signup-form/signup-form.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {StoreModule} from '@ngrx/store';
+import {metaReducers, reducers} from './reducers';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {EffectsModule} from '@ngrx/effects';
+import {LoginEffects} from './shared/components/login-form/login.effects';
 
 
 @NgModule({
@@ -33,12 +38,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 		SignupFormComponent,
 	],
 	imports: [
+		StoreModule.forRoot(reducers, {metaReducers}),
+		EffectsModule.forRoot([LoginEffects]),
+		StoreDevtoolsModule.instrument({
+			maxAge: 10
+		}),
 		BrowserModule,
 		AppRoutingModule,
 		FormsModule,
 		ReactiveFormsModule,
 		HttpClientModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

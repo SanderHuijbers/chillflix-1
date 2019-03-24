@@ -2,8 +2,6 @@ import {TestBed} from '@angular/core/testing';
 
 import {AuthService} from './auth.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {HttpClient} from '@angular/common/http';
-import {response} from 'express';
 
 describe('AuthService', () => {
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Film} from '../../models/film';
-import {FilmService} from '../../services/film.service';
+import {FilmsService} from '../../services/films.service';
 import {debounceTime, filter, take, tap} from 'rxjs/operators';
 import {FormControl, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
@@ -19,7 +19,7 @@ export class FilmSearchComponent implements OnInit {
 
 	private subscriptions = new Subscription();
 
-	constructor(private filmsService: FilmService) {
+	constructor(private filmsService: FilmsService) {
 	}
 
 	ngOnInit(): void {
@@ -30,7 +30,7 @@ export class FilmSearchComponent implements OnInit {
 		return this.searchControl.valueChanges.pipe(
 			tap(() => this.films = null),
 			filter(() => this.searchControl.valid),
-			//debounceTime(500),
+			debounceTime(500),
 			tap(value => this.refreshMovieSearchData(value))
 		).subscribe()
 	}

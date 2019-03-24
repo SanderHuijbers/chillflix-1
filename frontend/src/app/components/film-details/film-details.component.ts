@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MovieDetail} from '../../../../../shared/models/movie-detail.model';
 import {switchMap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {FilmService} from '../../services/film.service';
+import {FilmsService} from '../../services/films.service';
 import {Animations} from '../../shared/utils/animations';
 
 
@@ -18,6 +18,6 @@ export class FilmDetailsComponent {
 		.pipe(switchMap(params => this.filmService.filmDetailsById$(params.imdbId)));
 
 	constructor(private activatedRoute: ActivatedRoute,
-	            private filmService: FilmService) {
+	            private filmService: FilmsService) {
 	}
 }

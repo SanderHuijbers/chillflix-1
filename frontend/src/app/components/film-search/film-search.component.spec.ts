@@ -1,11 +1,9 @@
-import { async, ComponentFixture, TestBed, fakeAsync, inject, tick} from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {FilmSearchComponent} from './film-search.component';
-import {ReactiveFormsModule} from '@angular/forms';
 import {AppModule} from '../../app.module';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import { FilmService } from '../../services/film.service';
-import { FilmSearchFilmServiceMock } from './film-search.component.spec.helper';
+import {FilmsService} from '../../services/films.service';
+import {FilmSearchFilmServiceMock} from './film-search.component.spec.helper';
 
 describe('FilmSearchComponent', () => {
 	let component: FilmSearchComponent;
@@ -15,7 +13,7 @@ describe('FilmSearchComponent', () => {
 		TestBed.configureTestingModule({
             imports: [AppModule],
             providers: [
-                {provide: FilmService, useClass: FilmSearchFilmServiceMock},
+                {provide: FilmsService, useClass: FilmSearchFilmServiceMock},
             ]
 		}).compileComponents();
 	}));

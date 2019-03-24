@@ -1,4 +1,3 @@
-
 import {IFilmService} from '../../services/film.service.interface';
 import {MovieDetail} from '../../../../../shared/models/movie-detail.model';
 import {Observable, of} from 'rxjs';

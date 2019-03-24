@@ -1,4 +1,4 @@
-import { IFilmService } from './film.service.interface';
+import {IFilmService} from './film.service.interface';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -11,24 +11,24 @@ import {IMovieDetail} from '../../../../shared/interfaces/movie-detail.interface
 @Injectable({
 	providedIn: 'root'
 })
-export class FilmService implements IFilmService{
+export class FilmsService implements IFilmService{
 	private static api = 'api/movies';
 
 	constructor(private http: HttpClient) {
 	}
 
 	public search$(title: string): Observable<Film[]> {
-		return this.http.get<ICreateMovie[]>(`${FilmService.api}/search/${title}`)
+		return this.http.get<ICreateMovie[]>(`${FilmsService.api}/search/${title}`)
 			.pipe(
-				map(FilmService.MovieSearchResponseToFilmsMapper),
+				map(FilmsService.MovieSearchResponseToFilmsMapper),
 				take(1)
 			)
 	}
 
 	public filmDetailsById$(imdbId: string): Observable<MovieDetail> {
-		return this.http.get<IMovieDetail>(`${FilmService.api}/details/${imdbId}`)
+		return this.http.get<IMovieDetail>(`${FilmsService.api}/details/${imdbId}`)
 			.pipe(
-				map(FilmService.OMDBDetailToFilmDetail)
+				map(FilmsService.OMDBDetailToFilmDetail)
 			);
 	}
 
@@ -62,7 +62,7 @@ export class FilmService implements IFilmService{
 	}
 
 	private static MovieSearchResponseToFilmsMapper(omdbSearchResponse: ICreateMovie[]): Film[] {
-		return omdbSearchResponse.map(FilmService.OMDBMovieToFilm);
+		return omdbSearchResponse.map(FilmsService.OMDBMovieToFilm);
 	}
 
 	private static OMDBMovieToFilm(omdbFilm: ICreateMovie): Film {

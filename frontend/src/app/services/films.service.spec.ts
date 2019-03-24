@@ -1,12 +1,11 @@
 import {TestBed} from '@angular/core/testing';
 
-import {FilmService} from './film.service';
-import {UsersService} from './users.service';
+import {FilmsService} from './films.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {FilmServiceSpecHelper} from './film.service.spec.helper';
 
-describe('FilmService', () => {
-	let filmService: FilmService;
+describe('FilmsService', () => {
+	let filmService: FilmsService;
 	let httpTestingController: HttpTestingController;
 
 	beforeEach(() => {
@@ -15,7 +14,7 @@ describe('FilmService', () => {
 			});
 
 			// Inject the http service and test controller for each test
-			filmService = TestBed.get(FilmService);
+			filmService = TestBed.get(FilmsService);
 			httpTestingController = TestBed.get(HttpTestingController);
 		}
     );

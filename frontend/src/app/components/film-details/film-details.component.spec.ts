@@ -1,15 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {FilmDetailsComponent} from './film-details.component';
-import {AppRoutingModule} from '../../app-routing.module';
-import {RouterTestingModule} from '@angular/router/testing';
-import {FilmService} from '../../services/film.service';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FilmsService} from '../../services/films.service';
 import {ActivatedRoute} from '@angular/router';
-import {Observable, of} from 'rxjs';
+import {of} from 'rxjs';
 import {FilmDetailsFilmServiceMock} from './film-details.component.spec.helper';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { AppModule } from '../../app.module';
+import {AppModule} from '../../app.module';
 
 describe('FilmDetailsComponent', () => {
 	let component: FilmDetailsComponent;
@@ -20,7 +16,7 @@ describe('FilmDetailsComponent', () => {
 		TestBed.configureTestingModule({
 			imports: [AppModule],
 			providers: [
-				{provide: FilmService, useClass: FilmDetailsFilmServiceMock},
+				{provide: FilmsService, useClass: FilmDetailsFilmServiceMock},
 				{provide: ActivatedRoute,
 					useValue: {
 						params: of({id: 123})

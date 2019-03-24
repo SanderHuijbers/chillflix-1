@@ -1,7 +1,7 @@
 import {Calculator} from './calculator';
 
 
-fdescribe('FilmSearchComponent', () => {
+describe('FilmSearchComponent', () => {
 	let calculator: Calculator;
 
     it('should test', () => {
