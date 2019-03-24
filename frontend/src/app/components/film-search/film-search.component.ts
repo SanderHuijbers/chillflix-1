@@ -13,13 +13,16 @@ import {Animations} from '../../shared/utils/animations';
 	animations: [Animations.fadeInOut]
 })
 export class FilmSearchComponent implements OnInit {
+	// assignment 1.3: get the films directly from the store upon declaration (hint: it is an observable)
 	public films: Film[] | undefined | null = undefined;
 	public bucket: Film[] = [];
 	public searchControl = new FormControl(undefined, [Validators.minLength(3), Validators.required]);
 
 	private subscriptions = new Subscription();
 
+	// assignment 1.1: inject the application store
 	constructor(private filmsService: FilmsService) {
+
 	}
 
 	ngOnInit(): void {
@@ -36,6 +39,7 @@ export class FilmSearchComponent implements OnInit {
 	}
 
 	private refreshMovieSearchData(input: string): void {
+		// assignment 1.2: dispatch a new  instead of calling filmService Directly
 		this.filmsService.search$(input)
 			.pipe(
 				take(1),

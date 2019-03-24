@@ -3,8 +3,9 @@ import {AuthService} from '../../../services/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IUserLogin} from '../../../../../../shared/interfaces/user-login.interface';
 import {Store} from '@ngrx/store';
-import {LoginAction} from './login.actions';
 import {tap} from 'rxjs/operators';
+import {LoginAction} from './login.actions';
+import {AppState} from '../../../reducers';
 
 @Component({
 	selector: 'app-login-form',
@@ -14,13 +15,12 @@ import {tap} from 'rxjs/operators';
 export class LoginFormComponent implements OnInit {
 
 	public readonly loginForm = new FormGroup({
-		userName: new FormControl(undefined, [Validators.required, Validators.email]),
-		password: new FormControl(undefined, [Validators.required])
+		userName: new FormControl('bla@bla.nl', [Validators.required, Validators.email]),
+		password: new FormControl('Bla123$bla', [Validators.required])
 	});
 
 	constructor(private authService: AuthService,
-	            private store: Store<IUserLogin>) {
-		this.store.pipe(tap(console.log))
+	            private store: Store<AppState>) {
 	}
 
 	ngOnInit() {
@@ -28,7 +28,6 @@ export class LoginFormComponent implements OnInit {
 
 	public onSubmit() {
 		this.store.dispatch(new LoginAction(LoginFormComponent.userLogin(this.loginForm)));
-		//this.authService.login(LoginFormComponent.userLogin(this.loginForm)).subscribe();
 	}
 
 	private static userLogin(loginForm: FormGroup): IUserLogin {

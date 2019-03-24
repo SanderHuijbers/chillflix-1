@@ -14,7 +14,10 @@
             </li>
         </ul>
         <div class="navbar-text">
-            <a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="'active'">LOG IN</a>
+            <a *ngIf="!(loggedInUser | async); else showUserName" class="nav-link" [routerLink]="['/login']" [routerLinkActive]="'active'">Log in!</a>
+            <ng-template #showUserName>
+                {{(loggedInUser | async).userFullName}}
+            </ng-template>
         </div>
     </div>
 </nav>

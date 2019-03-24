@@ -1,17 +1,27 @@
-<section class="mb-3" @fadeInOut>
-    <div class="card bg-dark w-50 m-auto mb-5">
-        <div class="card-header">Login using your credentials</div>
-        <div class="card-body">
-            <app-login-form></app-login-form>
+<div *ngIf="!(loggedInUser | async); else showThanksForLoggingInMessage">
+    <section class="mb-3" @fadeInOut>
+        <div class="card bg-dark w-50 m-auto mb-5">
+            <div class="card-header">Login using your credentials</div>
+            <div class="card-body">
+                <app-login-form></app-login-form>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section @fadeInOut>
-    <div class="card bg-dark w-50 m-auto mt-5">
-        <div class="card-header">Not a member yet? signup here!</div>
+    <section @fadeInOut>
+        <div class="card bg-dark w-50 m-auto mt-5">
+            <div class="card-header">Not a member yet? signup here!</div>
+            <div class="card-body">
+                <app-signup-form></app-signup-form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<ng-template #showThanksForLoggingInMessage>
+    <div class="card bg-dark w-50 m-auto text-white mt-4" @fadeInOut>
         <div class="card-body">
-            <app-signup-form></app-signup-form>
+            <h5 class="card-title">thanks for logging in! you can now use our movie search services</h5>
         </div>
     </div>
-</section>
+</ng-template>
