@@ -7,7 +7,7 @@ import {Film} from '../../../models/film';
 	styleUrls: ['./film-bucket.component.scss']
 })
 export class FilmBucketComponent implements OnInit {
-
+	// assignment 2 BONUS FOR DIE HARDS: implement ngrx State management for the movie bucket instead of working with @Input()/@Output() decorators
 	@Input() public bucketFilms: Film[] = [];
 	@Output() public onRemoveFilm = new EventEmitter<Film>();
 
