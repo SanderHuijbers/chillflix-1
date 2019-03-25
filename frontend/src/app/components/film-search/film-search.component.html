@@ -5,8 +5,8 @@
        [formControl]="searchControl"
        @fadeInOut>
 
-<div class="row" *ngIf="films !== null; else showSpinner" @fadeInOut>
-    <app-film-list-item class="col-2 mb-3" *ngFor="let film of films" [film]="film"
+<div class="row" *ngIf="(films$ | async) !== undefined; else showSpinner" @fadeInOut>
+    <app-film-list-item class="col-2 mb-3" *ngFor="let film of (films$ | async)" [film]="film"
                         (onAddToBucket)="handleOnAddToBucket($event)">
     </app-film-list-item>
 </div>

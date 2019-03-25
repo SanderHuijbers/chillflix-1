@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, Effect, ofType} from '@ngrx/effects';
 import {EMPTY} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
 import {LoginAction, LoginActionTypes, TokenLoadedAction} from './login.actions';
 import {AuthService} from '../../../services/auth.service';
 
@@ -15,7 +15,7 @@ export class LoginEffects {
 	public readonly loginUser$ = this.actions$
 		.pipe(
 			ofType(LoginActionTypes.Login),
-			mergeMap((loginAction: LoginAction) => this.authService.login(loginAction.payload)
+			switchMap((loginAction: LoginAction) => this.authService.login(loginAction.payload)
 				.pipe(
 					map(token => (new TokenLoadedAction(token))),
 					catchError(() => EMPTY)

@@ -9,7 +9,7 @@ import {FilmsService} from '../../services/films.service';
 export class SearchEffects {
 
 	@Effect()
-	public readonly = this.actions$
+	public readonly searchQuery$ = this.actions$
 		.pipe(
 			ofType(SearchActionTypes.Search),
 			tap(console.log),
