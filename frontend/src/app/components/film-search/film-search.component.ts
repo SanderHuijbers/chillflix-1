@@ -16,7 +16,6 @@ import {SearchAction} from './search.actions';
 	animations: [Animations.fadeInOut]
 })
 export class FilmSearchComponent implements OnInit {
-	// assignment 1.3: get the films directly from the store upon declaration (hint: it is an observable)
 	public films: Film[] | undefined | null = undefined;
 	public readonly films$ = this.store.select(state => state.search.searchResults);
 	public bucket: Film[] = [];
@@ -24,10 +23,8 @@ export class FilmSearchComponent implements OnInit {
 
 	private subscriptions = new Subscription();
 
-	// assignment 1.1: inject the application store
 	constructor(private filmsService: FilmsService,
 	            private store: Store<AppState>) {
-
 	}
 
 	ngOnInit(): void {
@@ -50,7 +47,6 @@ export class FilmSearchComponent implements OnInit {
 	}
 
 	private refreshMovieSearchData(input: string): void {
-		// assignment 1.2: dispatch a new  instead of calling filmService Directly
 		this.store.dispatch(new SearchAction(input))
 	}
 
