@@ -8,6 +8,7 @@ import {Animations} from '../../shared/utils/animations';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {SearchAction} from './search.actions';
+import {AddToBucket} from '../../shared/components/film-bucket/bucket.actions';
 
 @Component({
 	selector: 'app-film-search',
@@ -51,7 +52,7 @@ export class FilmSearchComponent implements OnInit {
 	}
 
 	public handleOnAddToBucket(film: Film): void {
-		this.bucket = [...this.bucket, film];
+		this.store.dispatch(new AddToBucket(film));
 	}
 
 	public handleOnRemoveFilm(filmToRemove: Film): void {

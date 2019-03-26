@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Film} from '../../../models/film';
+import {AppState} from '../../../reducers';
+import {Store} from '@ngrx/store';
+import {RemoveFromBucket} from './bucket.actions';
 
 @Component({
 	selector: 'app-film-bucket',
@@ -8,16 +11,15 @@ import {Film} from '../../../models/film';
 })
 export class FilmBucketComponent implements OnInit {
 	// assignment 2 BONUS FOR DIE HARDS: implement ngrx State management for the movie bucket instead of working with @Input()/@Output() decorators
-	@Input() public bucketFilms: Film[] = [];
-	@Output() public onRemoveFilm = new EventEmitter<Film>();
+	public films$ = this.store.select(state => state.bucket);
 
-	constructor() {
+	constructor(private readonly store: Store<AppState>) {
 	}
 
 	ngOnInit() {
 	}
 
 	handleDeleteButtonClick(film: Film): void {
-		this.onRemoveFilm.emit(film);
+		this.store.dispatch(new RemoveFromBucket(film));
 	}
 }
