@@ -29,7 +29,6 @@ export class FilmSearchComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.mauriceApplicationStateService
 		/*this.store.select(state => state.search.searchQuery)
 			.pipe(
 				take(1),
