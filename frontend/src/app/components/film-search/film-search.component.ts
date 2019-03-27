@@ -9,6 +9,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../reducers';
 import {SearchAction} from './search.actions';
 import {AddToBucket} from '../../shared/components/film-bucket/bucket.actions';
+import {MauriceApplicationStateService} from '../../services/maurice-application-state.service';
 
 @Component({
 	selector: 'app-film-search',
@@ -23,15 +24,23 @@ export class FilmSearchComponent implements OnInit {
 	private subscriptions = new Subscription();
 
 	constructor(private filmsService: FilmsService,
-	            private store: Store<AppState>) {
+	            private store: Store<AppState>,
+	            private mauriceApplicationStateService: MauriceApplicationStateService) {
 	}
 
 	ngOnInit(): void {
-		this.store.select(state => state.search.searchQuery)
+		this.mauriceApplicationStateService
+		/*this.store.select(state => state.search.searchQuery)
 			.pipe(
 				take(1),
 				tap(searchQuery => this.searchPageControl.setValue(searchQuery))
-			).subscribe();
+			).subscribe();*/
+
+		this.mauriceApplicationStateService.state$.pipe(
+			map(state => state.searchQuery),
+			take(1),
+			tap(searchQuery => this.searchPageControl.setValue(searchQuery))
+		).subscribe();
 
 		this.subscriptions.add(this.handleSearchInputChangeSubscription());
 	}
@@ -45,6 +54,7 @@ export class FilmSearchComponent implements OnInit {
 	}
 
 	private refreshMovieSearchData(input: string): void {
+		this.mauriceApplicationStateService.addSearchQuery(input);
 		this.store.dispatch(new SearchAction(input))
 	}
 
