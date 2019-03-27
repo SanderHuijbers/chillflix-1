@@ -17,10 +17,8 @@ import {AddToBucket} from '../../shared/components/film-bucket/bucket.actions';
 	animations: [Animations.fadeInOut]
 })
 export class FilmSearchComponent implements OnInit {
-	public films: Film[] | undefined | null = undefined;
 	public readonly films$ = this.store.select(state => state.search.searchResults);
-	public bucket: Film[] = [];
-	public searchControl = new FormControl(undefined, [Validators.minLength(3), Validators.required]);
+	public searchPageControl = new FormControl(undefined, [Validators.minLength(3), Validators.required]);
 
 	private subscriptions = new Subscription();
 
@@ -32,16 +30,15 @@ export class FilmSearchComponent implements OnInit {
 		this.store.select(state => state.search.searchQuery)
 			.pipe(
 				take(1),
-				tap(searchQuery => this.searchControl.setValue(searchQuery))
+				tap(searchQuery => this.searchPageControl.setValue(searchQuery))
 			).subscribe();
 
 		this.subscriptions.add(this.handleSearchInputChangeSubscription());
 	}
 
 	private handleSearchInputChangeSubscription(): Subscription {
-		return this.searchControl.valueChanges.pipe(
-			tap(() => this.films = null),
-			filter(() => this.searchControl.valid),
+		return this.searchPageControl.valueChanges.pipe(
+			filter(() => this.searchPageControl.valid),
 			debounceTime(500),
 			tap(value => this.refreshMovieSearchData(value))
 		).subscribe()
@@ -53,9 +50,5 @@ export class FilmSearchComponent implements OnInit {
 
 	public handleOnAddToBucket(film: Film): void {
 		this.store.dispatch(new AddToBucket(film));
-	}
-
-	public handleOnRemoveFilm(filmToRemove: Film): void {
-		this.bucket = this.bucket.filter(film => film.imdbId !== filmToRemove.imdbId);
 	}
 }

@@ -33,24 +33,24 @@ describe('FilmSearchComponent', () => {
     });
 
     it('should resfresh film search when search form control gets a new value', fakeAsync(() => {
-        component.searchControl.setValue('green');
+        component.searchPageControl.setValue('green');
         tick(500);
 
 		expect(component.films).toBeTruthy();
     }));
 
     it('should resfresh film search when search form control gets a new value multiple times', fakeAsync(() => {
-        component.searchControl.setValue('green');
+        component.searchPageControl.setValue('green');
         tick(500);
         expect(component.films).toBeTruthy();
         component.films = [];
         
-        component.searchControl.setValue('blue');
+        component.searchPageControl.setValue('blue');
         tick(500);
         expect(component.films.length > 0).toBeTruthy();
         component.films = [];
 
-        component.searchControl.setValue('blue');
+        component.searchPageControl.setValue('blue');
         tick(500);
         expect(component.films.length > 0).toBeTruthy();
     }));

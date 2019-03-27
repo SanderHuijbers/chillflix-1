@@ -1,9 +1,4 @@
-<input class="mb-5 mt-5 mx-auto d-block form-control w-25"
-        id="search-field"
-       placeholder="search by films title"
-       type="search"
-       [formControl]="searchControl"
-       @fadeInOut>
+<app-search [searchControl]="searchPageControl" @fadeInOut></app-search>
 
 <div class="row" *ngIf="(films$ | async) !== undefined; else showSpinner" @fadeInOut>
     <app-film-list-item class="col-2 mb-3" *ngFor="let film of (films$ | async)" [film]="film"
@@ -15,3 +10,4 @@
         <span class="sr-only">Loading...</span>
     </div>
 </ng-template>
+

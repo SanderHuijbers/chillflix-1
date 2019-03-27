@@ -23,6 +23,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {LoginEffects} from './shared/components/login-form/login.effects';
 import {JwtTokenInterceptor} from './interceptors/jwt-token-interceptor.service';
 import {SearchEffects} from './components/film-search/search.effects';
+import { SearchInputTypeComponent } from './shared/components/search-input-type-component/search-input-type.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {SearchEffects} from './components/film-search/search.effects';
 		LoginComponent,
 		LoginFormComponent,
 		SignupFormComponent,
+		SearchInputTypeComponent,
 	],
 	imports: [
 		StoreModule.forRoot(reducers, {metaReducers}),
