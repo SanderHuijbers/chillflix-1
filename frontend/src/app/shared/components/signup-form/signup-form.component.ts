@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UsersService} from '../../../services/users.service';
 import {ICreateUser} from '../../../../../../shared/interfaces/create-user.interface';
+import {catchError, tap} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
 
 @Component({
 	selector: 'app-signup-form',
@@ -17,6 +20,8 @@ export class SignupFormComponent implements OnInit {
 		password: new FormControl(undefined, [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')])
 	});
 
+	public errorMessage?: string;
+
 	constructor(private userService: UsersService) {
 	}
 
@@ -27,7 +32,18 @@ export class SignupFormComponent implements OnInit {
 
 	/* on form submit sending data to the service and saving the user*/
 	public onSubmit(): void {
-		this.userService.saveUser(SignupFormComponent.createUser(this.signUpForm)).subscribe();
+		this.userService.saveUser(SignupFormComponent.createUser(this.signUpForm))
+			.pipe(
+				tap(() => {
+					this.errorMessage = undefined;
+					alert('user has been created')
+				}),
+				catchError(errorMessage => {
+					this.errorMessage = errorMessage;
+					return of(errorMessage)
+				})
+			)
+			.subscribe();
 	}
 
 	public static createUser(signUpForm: FormGroup): ICreateUser {

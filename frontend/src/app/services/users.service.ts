@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ICreateUser} from '../../../../shared/interfaces/create-user.interface';
-import {Observable} from 'rxjs';
-import {take} from 'rxjs/operators';
+import {Observable, of, throwError} from 'rxjs';
+import {catchError, take} from 'rxjs/operators';
+import {IUserLogin} from '../../../../shared/interfaces/user-login.interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -13,7 +14,13 @@ export class UsersService {
 	constructor(private http: HttpClient) {
 	}
 
-	public saveUser(user: ICreateUser): Observable<any> {
-		return this.http.post(UsersService.api, user).pipe(take(1));
+	public saveUser(user: ICreateUser): Observable<IUserLogin> {
+		return this.http.post<IUserLogin>(UsersService.api, user).pipe(
+			take(1),
+			catchError((httpErrorResponse: HttpErrorResponse) => {
+				alert(httpErrorResponse.error.message);
+				return throwError(httpErrorResponse.error.message);
+			})
+		);
 	}
 }
